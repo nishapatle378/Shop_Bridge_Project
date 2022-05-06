@@ -1,0 +1,157 @@
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h2>Shop<em>Bridge</em></h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index.html">Home
+                <!-- <span class="sr-only">(current)</span> -->
+              </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink="/main">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/dashboard">Our Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section>
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card-registration my-4">
+                    <form [formGroup]="productForm" (ngSubmit)="postProductsDetails()">
+                        <div class="row g-0" class="center">
+
+                            <h3 style="text-align:center">Sell your product</h3>
+
+
+                            <div class="card-body p-md-5 text-black" style="margin:0px 256px">
+
+
+
+                                <div class="form-outline col-md-12 mb-4">
+                                    <input type="text" class="form-control" formControlName="productName" id="Product name" placeholder="Product name">
+                                    <small *ngIf="productForm.get('productName').invalid && productForm.get('productName').touched" class="text-danger">*Product name is required</small>
+
+                                </div>
+                                <div class="form-outline col-md-12 mb-4">
+                                    <input type="number" class="form-control" formControlName="price" id="price" placeholder="Price">
+                                    <small *ngIf="productForm.get('price').invalid && productForm.get('price').touched" class="text-danger">*Product price is required</small>
+                                </div>
+
+
+
+                                <div class="form-outline col-md-12 mb-4">
+                                    <textarea class="form-control" formControlName="description" placeholder="Product description" id="floatingTextarea"></textarea>
+                                    <small *ngIf="productForm.get('description').invalid && productForm.get('description').touched" class="text-danger">*Product description is required</small>
+
+                                </div>
+                                <div class="form-outline col-md-12 mb-4">
+                                    <input type="text " id="projectinput1 " class="form-control" placeholder="Product image url" name="image" formControlName="image" value>
+                                    <small *ngIf="productForm.get('description').invalid && productForm.get('description').touched" class="text-danger">*Product image is required</small>
+                                </div>
+
+                                <br>
+                                <div class="sell">
+
+
+                                    <button type="submit" *ngIf="showAddbutton" [disabled]="productForm.invalid" class="btn btn-danger mx-3">Sell Product</button>
+                                    <button type="button" *ngIf="showUpdatebutton" (click)="updateProductsDetails()" class="btn btn-danger mx-3">Update Product Product</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="shopping-cart ">
+    <div class="row ">
+        <h3 style="text-align:center">Product List is here</h3>
+        <div class="col-sm-10" style="margin:0px 111px;">
+            <div class="card ">
+                <!-- <div class="card-header ">
+                <div class="card-title-wrap bar-warning ">
+                    <h4 class="card-title ">Invoice Summary</h4>
+                </div>
+            </div> -->
+
+                <div class="card-body">
+                    <div class="card-block ">
+
+                        <div class="table-responsive ">
+
+                            <table id="recent-orders " class="table table-hover table-xl mb-0 ">
+                                <thead>
+
+                                    <tr>
+                                        <th class="border-top-0 ">ID</th>
+                                        <th class="border-top-0 ">Product Image</th>
+                                        <th class="border-top-0 ">Product Name</th>
+                                        <th class="border-top-0 ">Description</th>
+                                        <th class="border-top-0 ">Product Price</th>
+
+                                        <th class="border-top-0 ">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of ProductsData; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td><img [src]="data.image" width="90"></td>
+                                        <td>{{data.productName}}</td>
+                                        <td>Rs. {{data.price}}</td>
+                                        <td>{{data.description}}</td>
+                                        <td style="width:118px;">
+
+                                            <!-- <button type="submit " (click)="onEdit(data) " class="btn btn-primary "> <i class="fa fa-edit"></i>
+                                                Edit
+                                            </button>
+                                            <button (click)="deleteProducts(data)" class="btn btn-danger mx-3"> <i class="fa fa-trash"></i>
+                    
+                                                Delete
+                                            </button> -->
+
+                                            <a class="btn btn-outline-success " (click)="onEdit(data)">
+                                                <i class="fa fa-edit"></i>
+                                            </a> &nbsp;
+                                            <a (click)="deleteProducts(data)" class="btn btn-outline-danger ">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
